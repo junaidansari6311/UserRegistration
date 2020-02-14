@@ -1,16 +1,22 @@
 #!/bin/bash -x
 shopt -s extglob
 echo "WELCOME TO USER REGISTRATION"
-read -p "Enter first name: " firstName
+read -p "Enter first name : " firstName
+read -p "Enter last name : " lastName
 
-function checkFirstName (){
-	validFirstName="^[A-Z]{1}[a-z]{3,}$"
-	if [[ $1 =~ $validFirstName ]]
+#Valid pattern for first and last name
+validName="^[A-Z]{1}[a-z]{2,}$"
+
+function validationOfUserInputs (){
+	local userInput=$1
+	local validPattern=$2
+	if [[ $userInput =~ $validPattern ]]
 	then
-		echo "First Name is valid"
+		echo "Valid"
 	else
-		echo "First Name is invalid"
+		echo "Invalid"
 	fi
 }
 
-checkFirstName $firstName
+validationOfUserInputs $firstName $validName
+validationOfUserInputs $lastName $validName
